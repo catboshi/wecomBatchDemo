@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.wedev.wecombatch.dao.ZhQywxCustRelMapper">
+    <resultMap id="BaseResultMap" type="tech.wedev.wecombatch.entity.po.ZhQywxCustRel">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="corp_id" property="corpId"/>
+        <result column="qywx_mgr_id" property="qywxMgrId"/>
+        <result column="qywx_mgr_name" property="qywxMgrName"/>
+        <result column="qywx_cust_id" property="qywxCustId"/>
+        <result column="qywx_cust_name" property="qywxCustName"/>
+        <result column="avatar" property="avatar"/>
+        <result column="type" property="type"/>
+        <result column="gender" property="gender"/>
+        <result column="union_id" property="unionId"/>
+        <result column="position" property="position"/>
+        <result column="corp_name" property="corpName"/>
+        <result column="corp_full_name" property="corpFullName"/>
+        <result column="external_profile" property="externalProfile"/>
+        <result column="remark" property="remark"/>
+        <result column="description" property="description"/>
+        <result column="add_time" property="addTime"/>
+        <result column="remark_corp_name" property="remarkCorpName"/>
+        <result column="remark_mobiles" property="remarkMobiles"/>
+        <result column="add_way" property="addWay"/>
+        <result column="oper_userid" property="operUserId"/>
+        <result column="state" property="state"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="create_id" property="createId"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="modified_id" property="modifiedId"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, corp_id, qywx_mgr_id, qywx_mgr_name, qywx_cust_id, qywx_cust_name, avatar, `type`, remark, gender, add_time, union_id, `position`, corp_name, corp_full_name, external_profile, add_way, oper_userid, description, remark_corp_name, remark_mobiles, `state`, gmt_create, create_id, gmt_modified, modified_id, is_deleted, sessoin_status, agree_status, status_time
+    </sql>
+
+    <delete id="deleteBySelective">
+        delete from zh_qywx_cust_rel
+        where (qywx_mgr_id, qywx_cust_id) in
+        <foreach collection="qywxCustRelList" separator="," open="(" close=")" item="item">
+            (#{item.qywxMgrId}, #{item.qywxCustId})
+        </foreach>
+    </delete>
+
+    <delete id="deleteByQywxMgrIdAndQywxCustId">
+        delete from zh_qywx_cust_rel where qywx_cust_id = #{qywxCustId} and qywx_mgr_id = #{qywxMgrId}
+    </delete>
+
+    <select id="selectByQywxMgrIdAndQywxCustIdAndCorpId"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from zh_qywx_cust_rel
+        where qywx_cust_id = #{qywxCustId}
+        and qywx_mgr_id = #{qywxMgrId}
+        and corp_id = #{corpId}
+    </select>
+
+    <update id="updateCustRemark" parameterType="tech.wedev.wecombatch.entity.po.ZhQywxCustRel">
+        update zh_qywx_cust_rel set
+        <if test="remark !=null and remark !=''">
+            remark = #{remark},
+        </if>
+        gmt_modified = now()
+        where qywx_cust_id = #{qywxCustId}
+        and qywx_mgr_id = #{qywxMgrId}
+        and corp_id = #{corpId}
+    </update>
+
+    <insert id="insertBatch">
+        insert into zh_qywx_cust_rel (corp_id, qywx_mgr_id, qywx_mgr_name, qywx_cust_id, qywx_cust_name, avatar, `type`, gender, union_id, `position`, corp_name, corp_full_name, external_profile, remark, description, add_time,
+                                      remark_corp_name, remark_mobiles, add_way, oper_userid, state, gmt_create, create_id, gmt_modified, modified_id, is_deleted)
+        values
+        <foreach collection="qywxCustRelList" item="custRel" index="index" separator=",">
+            (#{custRel.corpId,jdbcType=BIGINT},
+            #{custRel.qywxMgrId,jdbcType=VARCHAR},#{custRel.qywxMgrName,jdbcType=VARCHAR},
+            #{custRel.qywxCustId,jdbcType=VARCHAR},
+            #{custRel.qywxCustName,jdbcType=VARCHAR},#{custRel.avatar,jdbcType=VARCHAR},
+            #{custRel.type,jdbcType=VARCHAR},
+            #{custRel.gender,jdbcType=VARCHAR},#{custRel.unionId,jdbcType=VARCHAR},
+            #{custRel.position,jdbcType=VARCHAR},
+            #{custRel.corpName,jdbcType=VARCHAR},#{custRel.corpFullName,jdbcType=VARCHAR},
+            #{custRel.externalProfile,jdbcType=VARCHAR},
+            #{custRel.remark,jdbcType=VARCHAR},#{custRel.description,jdbcType=VARCHAR},
+            #{custRel.addTime,jdbcType=TIMESTAMP},
+            #{custRel.remarkCorpName,jdbcType=VARCHAR},#{custRel.remarkMobiles,jdbcType=VARCHAR},
+            #{custRel.addWay,jdbcType=INTEGER},
+            #{custRel.operUserId,jdbcType=VARCHAR},#{custRel.state,jdbcType=VARCHAR},
+            #{custRel.gmtCreate,jdbcType=TIMESTAMP},
+            #{custRel.createId,jdbcType=BIGINT},#{custRel.gmtModified,jdbcType=TIMESTAMP},
+            #{custRel.modifiedId,jdbcType=BIGINT},#{custRel.isDeleted,jdbcType=INTEGER})
+        </foreach>
+
+    </insert>
+
+</mapper>
