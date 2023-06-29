@@ -61,6 +61,9 @@
         <if test="remark !=null and remark !=''">
             remark = #{remark},
         </if>
+        <if test="remarkMobiles !=null and remarkMobiles !=''">
+            remark_mobiles = #{remarkMobiles},
+        </if>
         gmt_modified = now()
         where qywx_cust_id = #{qywxCustId}
         and qywx_mgr_id = #{qywxMgrId}
