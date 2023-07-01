@@ -134,9 +134,9 @@
 
         <!--雪花算法-->
         <dependency>
-            <groupId>tech.wedev</groupId>
+            <groupId>tech.wedev.util</groupId>
             <artifactId>snowflake</artifactId>
-            <version>0.0.1.RELEASE</version>
+            <version>1.0.0.RELEASE</version>
         </dependency>
 
         <!--公共dubbo服务-->
@@ -146,10 +146,18 @@
             <version>1.0.1.RELEASE</version>
         </dependency>
 
+        <!--dubbo依赖-->
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
             <version>0.2.0</version>
+        </dependency>
+
+        <!--Jedis依赖-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
         </dependency>
 
     </dependencies>
