@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech.wedev.wecombatch.dao.ZhQywxCustRelMapper;
-import tech.wedev.wecombatch.entity.po.ZhQywxCustRel;
+import tech.wedev.wecombatch.dao.QywxCustRelMapper;
+import tech.wedev.wecombatch.entity.po.QywxCustRel;
 import tech.wedev.wecombatch.standard.QywxCustRelService;
 
 import java.util.List;
@@ -15,14 +15,14 @@ import java.util.List;
 public class QywxCustRelServiceImpl implements QywxCustRelService {
 
     @Autowired
-    private ZhQywxCustRelMapper qywxCustRelMapper;
+    private QywxCustRelMapper qywxCustRelMapper;
 
     @Autowired
     QywxCustRelService custRelService;
 
     @Override
     @Transactional
-    public int replaceIntoQywxCustRelBatch(List<ZhQywxCustRel> qywxCustRelList) {
+    public int replaceIntoQywxCustRelBatch(List<QywxCustRel> qywxCustRelList) {
         int insertNum = 0;
         //通过唯一约束删除已有数据
         qywxCustRelMapper.deleteBySelective(qywxCustRelList);
@@ -32,7 +32,7 @@ public class QywxCustRelServiceImpl implements QywxCustRelService {
     }
 
     @Override
-    public int insertBatch(List<ZhQywxCustRel> qywxCustRelList) {
+    public int insertBatch(List<QywxCustRel> qywxCustRelList) {
         int insertNum = 0;
         try {
             insertNum = custRelService.replaceIntoQywxCustRelBatch(qywxCustRelList);

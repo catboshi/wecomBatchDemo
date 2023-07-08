@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import tech.wedev.autm.asyntask.AsynTaskBean;
 import tech.wedev.autm.asyntask.AsynTaskErrInfo;
 import tech.wedev.autm.asyntask.api.IAsynTask;
-import tech.wedev.wecombatch.dao.ZhQywxCustRelMapper;
-import tech.wedev.wecombatch.entity.po.ZhQywxCustRel;
+import tech.wedev.wecombatch.dao.QywxCustRelMapper;
+import tech.wedev.wecombatch.entity.po.QywxCustRel;
 import tech.wedev.wecombatch.exception.ExceptionCode;
 import tech.wedev.wecombatch.standard.CustRelInfoService;
 import tech.wedev.wecombatch.third.WecomRequestService;
@@ -21,7 +21,7 @@ import java.util.*;
 public class EditExternalContactTask implements IAsynTask {
 
     @Autowired
-    private ZhQywxCustRelMapper qywxCustRelMapper;
+    private QywxCustRelMapper qywxCustRelMapper;
 
     @Autowired
     private CustRelInfoService custRelInfoService;
@@ -72,8 +72,8 @@ public class EditExternalContactTask implements IAsynTask {
         return errInfo;
     }
 
-    public ZhQywxCustRel getQywxData(String qywxMrgId, String qywxCustId, String corpId) throws Exception {
-        List<ZhQywxCustRel> qywxCustRelList = new ArrayList<>();
+    public QywxCustRel getQywxData(String qywxMrgId, String qywxCustId, String corpId) throws Exception {
+        List<QywxCustRel> qywxCustRelList = new ArrayList<>();
         Map<String, Object> map = wecomRequestService.getExternalUserData(corpId, qywxCustId);
         log.info("编辑客户事件回调###调用企微API获取客户企微侧数据: " + JSONObject.toJSONString(map));
         String errcode = String.valueOf(map.get("errCode"));
@@ -82,7 +82,7 @@ public class EditExternalContactTask implements IAsynTask {
             return null;
         } else {
             log.info("编辑客户事件回调###qywx_cust_rel更新关系信息，getCustRelInfo入参: \"qywxMgrId\": " + qywxMrgId + ", \"qywxCustId\": " + qywxCustId);
-            ZhQywxCustRel qywxCustRel = custRelInfoService.getCustRelByCust(map, qywxMrgId, corpId);
+            QywxCustRel qywxCustRel = custRelInfoService.getCustRelByCust(map, qywxMrgId, corpId);
             log.info("编辑客户事件回调###qywx_cust_rel更新关系信息: " + JSONObject.toJSONString(qywxCustRel));
             qywxCustRelList.add(qywxCustRel);
             qywxCustRelMapper.selectByQywxMgrIdAndQywxCustIdAndCorpId(corpId, qywxMrgId, qywxCustId)
