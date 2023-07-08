@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import tech.wedev.autm.asyntask.AsynTaskBean;
 import tech.wedev.autm.asyntask.AsynTaskErrInfo;
 import tech.wedev.autm.asyntask.api.IAsynTask;
-import tech.wedev.wecombatch.dao.ZhQywxCustRelMapper;
+import tech.wedev.wecombatch.dao.QywxCustRelMapper;
 import tech.wedev.wecombatch.exception.ExceptionCode;
 
 import java.time.LocalDateTime;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class DelExternalContactTask implements IAsynTask {
 
     @Autowired
-    private ZhQywxCustRelMapper qywxCustRelMapper;
+    private QywxCustRelMapper qywxCustRelMapper;
 
     @Override
     public AsynTaskErrInfo executeTask(AsynTaskBean task) {

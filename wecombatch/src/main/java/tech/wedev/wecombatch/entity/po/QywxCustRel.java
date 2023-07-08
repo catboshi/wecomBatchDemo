@@ -9,7 +9,7 @@ import java.util.Date;
  * zh_qywx_cust_rel
  */
 @Data
-public class ZhQywxCustRel extends BasePO implements Serializable {
+public class QywxCustRel extends BasePO implements Serializable {
     /**
      * 自增主键
      */

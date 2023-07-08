@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import tech.wedev.wecombatch.entity.po.ZhQywxCustRel;
+import tech.wedev.wecombatch.entity.po.QywxCustRel;
 import tech.wedev.wecombatch.standard.CustRelInfoService;
 import tech.wedev.wecombatch.utils.StringUtils;
 
@@ -16,8 +16,8 @@ import java.util.*;
 @Service
 public class CustRelInfoServiceImpl implements CustRelInfoService {
     @Override
-    public ZhQywxCustRel getCustRelByCust(Map<String, Object> map, String userId, String corpId) {
-        ZhQywxCustRel qywxCustRel = new ZhQywxCustRel();
+    public QywxCustRel getCustRelByCust(Map<String, Object> map, String userId, String corpId) {
+        QywxCustRel qywxCustRel = new QywxCustRel();
         JSONObject data = (JSONObject) map.get("data");
         JSONObject custInfo;
         try {
@@ -79,7 +79,7 @@ public class CustRelInfoServiceImpl implements CustRelInfoService {
         return qywxCustRel;
     }
 
-    private void setCustRel(ZhQywxCustRel qywxCustRel, JSONObject followUser, Integer addWay, String state) {
+    private void setCustRel(QywxCustRel qywxCustRel, JSONObject followUser, Integer addWay, String state) {
         Integer createTime = (Integer) followUser.get("createtime");
         String remark = (String) followUser.get("remark");
         String description = (String) followUser.get("description");
@@ -118,8 +118,8 @@ public class CustRelInfoServiceImpl implements CustRelInfoService {
     }
 
     @Override
-    public List<ZhQywxCustRel> getCustRelByCustList(Map<String, Object> map, String userId, String corpId) {
-        List<ZhQywxCustRel> qywxCustRelList = new ArrayList<>();
+    public List<QywxCustRel> getCustRelByCustList(Map<String, Object> map, String userId, String corpId) {
+        List<QywxCustRel> qywxCustRelList = new ArrayList<>();
         JSONObject data = (JSONObject) map.get("data");
         JSONArray externalContactList = (JSONArray) data.get("external_contact_list");
         for (int i = 0; i < externalContactList.size(); i++) {
@@ -140,7 +140,7 @@ public class CustRelInfoServiceImpl implements CustRelInfoService {
                  * follow_user.oper_userid(oper_userid) 发起添加的userid
                  * follow_user.state(state) 企业自定义的state参数
                  */
-                ZhQywxCustRel qywxCustRel = new ZhQywxCustRel();
+                QywxCustRel qywxCustRel = new QywxCustRel();
                 qywxCustRel.setQywxMgrId(userId);
                 qywxCustRel.setQywxCustId((String) externalContact.get("external_userid"));
                 qywxCustRel.setQywxCustName((String) externalContact.get("name"));
