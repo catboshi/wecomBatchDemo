@@ -16,7 +16,7 @@
 	<!-- version 版本号必须和服务提供者版本号对应 -->
 	<!--interface 引入服务提供者对外暴露的接口  -->
 	<!--url:服务消费者直接服务提供者，服务提供者地址  -->
-	<dubbo:reference id="dubboService" interface="tech.wedev.dubbo.wecom.service.dubboWecomRpcService" timeout="5000" version="1.0.0" />
+	<dubbo:reference id="dubboService" interface="tech.wedev.dubbo.wecom.service.DubboWecomRpcService" timeout="5000" version="1.0.0" />
 
 	<!--监控中心配置 监控中心协议，如果为protocol="registry"，表示从注册中心发现监控中心地址，否则直连监控中心。 -->
 	<!--<dubbo:monitor protocol="registry"></dubbo:monitor>-->

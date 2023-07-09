@@ -11,4 +11,12 @@ public interface WecomRequestService {
      * @throws Exception
      */
     Map<String, Object> getExternalUserData(String corpId, String externalUserId) throws Exception;
+
+    /**
+     * 发送应用消息
+     * @param requestMap
+     * @return
+     * @throws Exception
+     */
+    Map<String, Object> pushApplicationMessage(Map<String, Object> requestMap) throws Exception;
 }

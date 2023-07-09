@@ -3,7 +3,7 @@ package tech.wedev.wecombatch.third.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.wedev.dubbo.wecom.service.dubboWecomRpcService;
+import tech.wedev.dubbo.wecom.service.DubboWecomRpcService;
 import tech.wedev.wecombatch.request.RequestV1Private;
 import tech.wedev.wecombatch.third.WecomRequestService;
 
@@ -15,7 +15,7 @@ import java.util.Map;
 public class WecomRequestServiceImpl implements WecomRequestService {
 
     @Autowired
-    private dubboWecomRpcService dubboWecomRpcService;
+    private DubboWecomRpcService dubboWecomRpcService;
 
     @Override
     public Map<String, Object> getExternalUserData(String corpId, String externalUserId) {
@@ -28,4 +28,11 @@ public class WecomRequestServiceImpl implements WecomRequestService {
         httpDataMap.put("Private", requestV1Private);
         return dubboWecomRpcService.getApiExternalContactGet(httpDataMap);
     }
+
+    @Override
+    public Map<String, Object> pushApplicationMessage(Map<String, Object> requestMap) {
+        //rpc调用企微API发送应用消息
+        return dubboWecomRpcService.getApiPushApplicationMessage(requestMap);
+    }
+
 }
