@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.wedev.dubbo.wecom.service.dubboWecomRpcService;
+import tech.wedev.dubbo.wecom.service.DubboWecomRpcService;
 import tech.wedev.wecombatch.request.RequestV1Private;
 
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class TestController {
 
     @Autowired
-    private dubboWecomRpcService dubboWecomRpcService;
+    private DubboWecomRpcService dubboWecomRpcService;
 
     @RequestMapping("/externalcontact/get/{external_userid}")
     public Map<String, Object> getExternalContact(@PathVariable String external_userid) {
