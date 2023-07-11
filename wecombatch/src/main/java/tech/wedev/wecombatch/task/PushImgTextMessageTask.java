@@ -213,7 +213,7 @@ public class PushImgTextMessageTask implements IAsynTask {
         articleInfo.setDescription(wecomMarketArticlePO.getArticleAbstract() +
                 (StringUtils.isNotBlank(wecomMarketArticlePO.getArticleAbstract()) ? "-" : "") +
                 DateUtils.formatDateToStr(wecomMarketArticlePO.getReleaseTime(), "yyyy年MM月dd日"));
-        articleInfo.setUrl(wecomMarketArticlePO.getArticleLink());
+        articleInfo.setUrl(redirectUrl);
         String picUrl = "";
         if (qywxAppMsgPO.getCoverUrl().indexOf("/") == 0) {
             picUrl = wecomAliyunPicUrlPrefix + qywxAppMsgPO.getCoverUrl();
