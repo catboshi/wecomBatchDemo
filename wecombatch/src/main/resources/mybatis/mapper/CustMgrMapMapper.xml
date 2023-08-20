@@ -55,5 +55,42 @@
         and is_deleted=0
     </select>
 
+    <select id="selectCustMgrMapList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from zh_cust_mgr_map_test
+        where qywx_corp_id = #{qywxCorpId}
+        and qywx_mgr_id is not null
+        and qywx_mgr_status=4
+        and enable=1
+        and is_deleted=0
+        limit #{limit} offset #{offset}
+    </select>
 
+    <select id="selectCustMgrMapListById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from zh_cust_mgr_map_test
+        where qywx_corp_id = #{qywxCorpId}
+        and qywx_mgr_id is not null
+        and qywx_mgr_status=4
+        and enable=1
+        and is_deleted=0
+        and id <![CDATA[ > ]]> #{min, jdbcType=BIGINT}
+        and id <![CDATA[ <= ]]> #{max, jdbcType=BIGINT}
+    </select>
+
+    <select id="selectMinIdByCustMgrMapList" resultType="java.lang.Integer">
+        select min(id)
+        from zh_cust_mgr_map_test
+        where qywx_corp_id = #{qywxCorpId}
+    </select>
+
+    <select id="selectCountCustMgrMapList" resultType="java.lang.Integer">
+        select
+        count(1)
+        from zh_cust_mgr_map_test
+        where 1=1
+        and qywx_corp_id = #{qywxCorpId}
+    </select>
 </mapper>
